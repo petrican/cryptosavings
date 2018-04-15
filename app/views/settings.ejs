@@ -1,0 +1,118 @@
+<% extend('layout') %>
+
+<header>
+    <% include ./partial_header %>
+</header>
+
+<main>
+
+    <% include ./navbar_second %>
+
+    <!-- MAIN PAGE COMPARISON -->
+    <div class="jumbotron">
+
+
+<!-- Button trigger modal -->
+<button class="btn btn-primary btn" data-toggle="modal" data-target="#addExchangeModal">
+    <span class="glyphicon glyphicon-plus"></span>&nbsp;Add New Exchange Account
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="addExchangeModal" tabindex="-1" role="dialog"
+     aria-labelledby="addExchangeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close"
+                   data-dismiss="modal">
+                       <span aria-hidden="true">&times;</span>
+                       <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="addExchangeModalLabel">
+                    Add New Exchange API Account
+                </h4>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+
+                <form role="form" method="POST" action="/settings/new">
+                  <div class="form-group">
+                    <label for="exchExchange">Exchange</label>
+                      <select class="form-control" id="exchExchange" name="exchExchange" required>
+                        <option value="bittrex" selected="selected">Bittrex</option>
+                      </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="exchAccountNickname">Account Nickname</label>
+                      <input type="text" class="form-control" id="exchAccountNickname" name="exchAccountNickname" placeholder="Enter name"/>
+                  </div>
+                  <div class="form-group">
+                    <label for="exchApiKey">API Key</label>
+                      <input type="text" class="form-control" id="exchApiKey" name="exchApiKey" placeholder="Enter key"/>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="exchApiKey">Secret</label>
+                      <input type="text" class="form-control" id="exchApiSecret" name="exchApiSecret" placeholder="Enter secret"/>
+                  </div>
+
+
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+
+
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">
+                            Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+      <table class="table table-hover">
+         <thead>
+           <tr>
+             <td><strong>Exchange</strong></td>
+             <td><strong>Account Nickname</strong></td>
+             <td><strong>AccountType</strong></td>
+             <td><strong>Key</strong></td>
+             <td><strong>Additional Info</strong></td>
+             <td><strong>Active</strong></td>
+             <td><strong>Actions</strong></td>
+           </tr>
+        </thead>
+        <tbody>
+          <% if (exchanges.length) { %>
+              <% for (var i = 0; i < exchanges.length; i++) { %>
+              <tr>
+              <td><%= exchanges[i].exchange %></td>
+              <td><%= exchanges[i].exchname %></td>
+              <td><%= exchanges[i].acctype %></td>
+              <td><%= exchanges[i].key %></td>
+              <td><%= exchanges[i].info %></td>
+              <td><%= exchanges[i].active %></td>
+              <td>&nbsp;</td>
+              </tr>
+              <% } %>
+            <% } else { %>
+              <tr>
+                <td colspan="6" class="warning">There are no exchages currently set. Add some using the button 'Add New Exchange Account'</td>
+              </tr>
+            <% } %>
+          </tr>
+        </tbody>
+      </table>
+
+
+    </div>
+</main>

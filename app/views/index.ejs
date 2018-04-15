@@ -1,0 +1,50 @@
+<% extend('layout') %>
+
+<header>
+    <% include ./partial_header %>
+</header>
+
+<main>
+
+    <!-- MAIN PAGE COMPARISON -->
+    <div class="jumbotron">
+
+
+    <div id="app">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <td><strong>Rank</strong></td>
+            <td><strong>Name</strong></td>
+            <td><strong>Symbol</strong></td>
+            <td><strong>Price (USD)</strong></td>
+            <td><strong>1H</strong></td>
+            <td><strong>1D</strong></td>
+            <td><strong>1W</strong></td>
+            <td><strong>Market Cap (USD)</strong></td>
+        </thead>
+        <tbody>
+          <tr v-cloak v-for="coin in coins">
+            <td>{{ coin.rank }}</td>
+            <td><img v-bind:src="getCoinImage(coin.symbol)"> {{ coin.name }}</td>
+            <td>{{ coin.symbol }}</td>
+            <td>{{ coin.price_usd | currency }}</td>
+            <td v-bind:style="getColor(coin.percent_change_1h)">
+              <span v-if="coin.percent_change_1h > 0">+</span>{{ coin.percent_change_1h }}%
+            </td>
+            <td v-bind:style="getColor(coin.percent_change_24h)">
+              <span v-if="coin.percent_change_24h > 0">+</span>{{ coin.percent_change_24h }}%
+            </td>
+            <td v-bind:style="getColor(coin.percent_change_7d)">
+              <span v-if="coin.percent_change_7d > 0">+</span>{{ coin.percent_change_7d }}%
+            </td>
+            <td>{{ coin.market_cap_usd | currency }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    </div>
+
+
+</main>

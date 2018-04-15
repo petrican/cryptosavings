@@ -1,0 +1,114 @@
+$bg-color: light-gray;
+
+body {
+    background: $bg-color;
+}
+
+
+#login-dp{
+    min-width: 250px;
+    padding: 14px 14px 0;
+    overflow:hidden;
+    background-color:rgba(255,255,255,.8);
+}
+#login-dp .help-block{
+    font-size:12px
+}
+#login-dp .bottom{
+    background-color:rgba(255,255,255,.8);
+    border-top:1px solid #ddd;
+    clear:both;
+    padding:14px;
+}
+#login-dp .social-buttons{
+    margin:12px 0
+}
+#login-dp .social-buttons a{
+    width: 49%;
+}
+#login-dp .form-group {
+    margin-bottom: 10px;
+}
+.btn-fb{
+    color: #fff;
+    background-color:#3b5998;
+}
+.btn-fb:hover{
+    color: #fff;
+    background-color:#496ebc
+}
+.btn-tw{
+    color: #fff;
+    background-color:#55acee;
+}
+.btn-tw:hover{
+    color: #fff;
+    background-color:#59b5fa;
+}
+@media(max-width:768px){
+    #login-dp{
+        background-color: inherit;
+        color: #fff;
+    }
+    #login-dp .bottom{
+        background-color: inherit;
+        border-top:0 none;
+    }
+}
+
+/* Blue bar */
+.navbar {
+	background: #0747A6 !important;
+}
+.navbar-nav > .open > a:focus {
+  background: #0747A6 !important;
+  font-weight: 700;
+}
+.white-link {
+  color: #ffffff !important;
+}
+
+h1 {
+  text-align: center;
+}
+
+td img {
+  width: 25px;
+}
+
+.jumbotron p {
+  font-size: 1.2em;
+}
+
+.jumbotron {
+  margin-top: 5em;
+  margin-bottom: 5em;
+}
+
+.white-background {
+  background: #ffffff;
+}
+
+.light-blue {
+  color: #337ab7;
+}
+
+/* Second Navbar */
+.sn-links {
+  padding: 0px !important;
+  list-style-type: none;
+  margin: 0px;
+  display: inline;
+}
+.sn-links-item {
+  display: inline;
+  margin-right: 10px;
+  float: left;
+}
+.no-padding {
+  padding: 0px !important;
+}
+
+.navbar-profile-picture {
+  width: 25px !important;
+}

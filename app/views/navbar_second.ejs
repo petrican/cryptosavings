@@ -1,0 +1,31 @@
+<%
+/**
+ * Second Navbar - Links to Dashboard, settings (authenticated)
+ */
+%>
+<div class="container">
+   <div class="row">
+       <ul class="sn-links no-padding">
+         <li class="sn-links-item">
+           <a href="/dashboard">
+             <i class="fa fa-home"></i>
+             Dashboard
+           </a>
+         </li>
+         <li class="sn-links-item">
+           <a href="/settings">
+             <i class="fa fa-gear"></i>
+             Settings
+           </a>
+         </li>
+       </ul>
+
+       <ul id="hexchanges" class="pull-right sn-links no-padding light-blue">
+         <li v-if="typeof coinData.BTC !== 'undefined'" class="sn-links-item"> Bitcoin &bull; ${{ coinData.BTC.USD }} &nbsp; </li>
+         <li v-if="typeof coinData.BCC !== 'undefined'" class="sn-links-item"> BitcoinCash &bull; ${{ coinData.BCC.USD }} &nbsp; </li>
+         <li v-if="typeof coinData.ETH !== 'undefined'" class="sn-links-item"> Ethereum &bull; ${{ coinData.ETH.USD }} &nbsp; </li>
+         <li v-if="typeof coinData.LTC !== 'undefined'" class="sn-links-item"> Litecoin &bull; ${{ coinData.LTC.USD }} &nbsp;</li>
+         <li class="sn-links-item"> &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; </li>
+       </ul>
+   </div>
+</div>

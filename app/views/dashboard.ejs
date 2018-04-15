@@ -1,0 +1,105 @@
+<% extend('layout') %>
+
+<header>
+    <% include ./partial_header %>
+</header>
+
+<main>
+
+    <% include ./navbar_second %>
+
+    <!-- MAIN PAGE COMPARISON -->
+    <div class="jumbotron" id="dashboard">
+      <!-- Selectbox to allow dashboard exchange selection -->
+      <div class="row">
+        <div class="class-md-6 pull-right text-right">
+          <select class="form-control" id="exchangesSelector" name="exchangesSelector" v-on:change="updateExchangeData">
+            <option value="all">Select Market</option>
+            <option value="bittrex">Bittrex</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <ul class="nav nav-tabs">
+          <li class="active"><a data-toggle="tab" href="#balance">Balance</a></li>
+          <li><a data-toggle="tab" href="#portfolio">Portfolio</a></li>
+          <li><a data-toggle="tab" href="#history">History</a></li>
+        </ul>
+
+        <div class="tab-content">
+
+          <div id="balance" class="tab-pane fade in active">
+            <div v-if="exchange == 'all'" class="alert alert-warning">
+              There are no exchanges selected. You need to select one to see the balance.
+            </div>
+            <div v-if="exchange == 'bittrex'">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <td><strong>Currency</strong></td>
+                    <td><strong>Balance</strong></td>
+                    <td><strong>Available</strong></td>
+                    <td><strong>Pending</strong></td>
+                    <td><strong>CryptoAddress</strong></td>
+                </thead>
+                <tbody>
+                  <tr v-cloak v-for="bItem in balance">
+                    <td>{{ bItem.Currency }}</td>
+                    <td>{{ bItem.Balance }}</td>
+                    <td>{{ bItem.Available }}</td>
+                    <td>{{ bItem.Pending }}</td>
+                    <td>{{ bItem.CryptoAddress }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div id="portfolio" class="tab-pane fade">
+            <h3>Portfolio</h3>
+            <p>Portfolio here...</p>
+          </div>
+          <div id="history" class="tab-pane fade">
+            <h3>History</h3>
+            <p>History here...</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var dashboard = new Vue({
+      el: '#dashboard',
+      data: {
+        name: 'dashboard',
+        balance: "TEST",
+        exchange: 'all'
+      },
+      methods: {
+        updateExchangeData: function (event) {
+          socket.emit('setExchange', { newExchange: event.currentTarget.value });
+        }
+      }
+    });
+
+    // SOCKET
+    var socket = io();  // autodiscover
+    socket.on('getExchangeUpdatedData', function(data){
+      console.log('Connected to socket');
+      console.log(data);
+      switch (data.current_exchange) {
+        case 'bittrex':
+            if (data.data.success) {
+                dashboard.exchange = 'bittrex';
+                dashboard.balance  = data.data.result;
+            }
+            break;
+        default:
+      }
+    });
+
+
+</script>
+</main>
